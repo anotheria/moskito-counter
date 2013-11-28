@@ -23,6 +23,11 @@
 		</dependency>
         <dependency>
             <groupId>net.anotheria</groupId>
+            <artifactId>moskito-web</artifactId>
+            <version>${moskito-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>net.anotheria</groupId>
             <artifactId>moskito-aop</artifactId>
             <version>${moskito-version}</version>
         </dependency>

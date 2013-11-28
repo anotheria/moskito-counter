@@ -3,6 +3,7 @@ package net.anotheria.moskitocounter;
 import net.anotheria.moskito.web.MoskitoHttpServlet;
 import net.anotheria.util.StringUtils;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,14 +19,25 @@ import java.io.IOException;
 @WebServlet(urlPatterns = "/counter/*")
 public class CounterServlet extends MoskitoHttpServlet{
 
-	private WebUIPageCounter webUIPageCounter = new WebUIPageCounter();
-	private ToolCounter toolCounter = new ToolCounter();
+	private WebUIPageCounter webUIPageCounter;
+	private ToolCounter toolCounter;
+
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		super.init(config);
+
+		toolCounter = new ToolCounter();
+		webUIPageCounter = new WebUIPageCounter();
+	}
 
 	@Override
 	protected void moskitoDoGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String path = req.getPathInfo();
 		if (path==null || path.length()==0)
 			return;
+
+		if (path.startsWith("/") && path.length()>1)
+			path = path.substring(1);
 
 		String t[] = StringUtils.tokenize(path, '/');
 		String application = t[0];
