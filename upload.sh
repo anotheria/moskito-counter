@@ -1,0 +1,2 @@
+scp -P 2050 target/ROOT.war thales@counter.moskito.org:/tmp/
+ssh -p 2050 thales@counter.moskito.org 'cd /opt/app/tomcat7; bin/shutdown.sh -force; rm -rf webapps/ROOT; mv /tmp/ROOT.war webapps/; bin/startup.sh; tail -50 logs/catalina.shutdown'
