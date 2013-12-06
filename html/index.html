@@ -50,17 +50,21 @@
                         <ul>
                             <li><a href="/mui/mskShowProducer?pProducerId=ToolCounter">by Tools</a></li>
                             <li><a href="/mui/mskShowProducer?pProducerId=WebUIPageCounter.countPage">inside MoSKito-WebUI</a></li>
-                            <li>... to be added ...</li>
+                            <li><a href="/mui/mskAccumulators?id_1=set&id_2=set&id_3=set&id_4=set&id_5=set&id_6=set&mode=multiple&type=LineChart&normalizeBase=100&maxValues=200"></a>Accumulators: tool usage</li>
                         </ul>
                     </p>
 
                     <p>You can switch the Counter off with a configuration option: <br>
-					Add file mskwebui.json to your classpath with following line: <br>
+					For MoSKito Essential: add file <em>mskwebui.json</em> to your classpath with following line: <br>
 					<code>
 						{
 							"trackUsage": false
 						}
 					</code>
+                    For MoSKito Control: add following line to your <em>moskitocontrol.json</em>: <br>
+                    <code>
+                        "trackUsage": false
+                    </code>
 					</p>
                     <a href="http://www.moskito.org/">MoSKito Home</a>
                 </div>
