@@ -14,6 +14,54 @@
 				"className": "net.anotheria.moskito.core.plugins.NoOpPlugin"
 			}
 		]
-	}
+	},
+
+    "@accumulatorsConfig" : {
+        "@accumulators": [
+            {
+                "name": "ToolsOverall 1h",
+                "producerName": "ToolCounter",
+                "statName": "cumulated",
+                "valueName": "Counter",
+                "intervalName": "1h"
+            },
+            {
+                "name": "ToolsOverall 5m",
+                "producerName": "ToolCounter",
+                "statName": "cumulated",
+                "valueName": "Counter",
+                "intervalName": "5m"
+            },
+            {
+                "name": "WebUI Total 1h",
+                "producerName": "ToolCounter",
+                "statName": "webui",
+                "valueName": "Counter",
+                "intervalName": "1h"
+            },
+            {
+                "name": "WebUI Total 5m",
+                "producerName": "ToolCounter",
+                "statName": "webui",
+                "valueName": "Counter",
+                "intervalName": "5m"
+            },
+            {
+                "name": "Control Total 1h",
+                "producerName": "ToolCounter",
+                "statName": "control",
+                "valueName": "Counter",
+                "intervalName": "1h"
+            },
+            {
+                "name": "Control Total 5m",
+                "producerName": "ToolCounter",
+                "statName": "control",
+                "valueName": "Counter",
+                "intervalName": "5m"
+            }
+
+        ]
+    }
 	
 }
