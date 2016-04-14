@@ -12,7 +12,7 @@
 	<name>moskito-counter</name>
 	<packaging>war</packaging>
 	<properties>
-		<moskito-version>2.4.1-SNAPSHOT</moskito-version>
+		<moskito-version>2.7.3</moskito-version>
 	</properties>
 
 	<dependencies>
@@ -36,6 +36,12 @@
 			<artifactId>moskito-webui</artifactId>
 			<version>${moskito-version}</version>
 		</dependency>
+        <dependency>
+            <groupId>net.anotheria</groupId>
+            <artifactId>moskito-inspect-embedded</artifactId>
+            <version>${moskito-version}</version>
+        </dependency>
+
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
@@ -83,15 +89,15 @@
 				<artifactId>maven-dependency-plugin</artifactId>
 				<configuration>
 					<artifactItems>
-						<artifactItem>
-							<groupId>net.anotheria</groupId>
-							<artifactId>moskito-webui</artifactId>
-							<version>${moskito-version}</version>
-							<type>jar</type>
-							<overWrite>true</overWrite>
-							<outputDirectory>${project.build.directory}/tmp</outputDirectory>
-							<includes>img/*,js/*.js, js/charts/*.js,js/charts/highcharts/*.js,js/charts/jqplot/*.js,**/*.jsp,css/*.css</includes>
-						</artifactItem>
+                        <artifactItem>
+                            <groupId>net.anotheria</groupId>
+                            <artifactId>moskito-webui</artifactId>
+                            <version>${moskito.version}</version>
+                            <type>jar</type>
+                            <overWrite>true</overWrite>
+                            <outputDirectory>${project.build.directory}/tmp/media</outputDirectory>
+                            <includes>moskito/**,**/*.jsp</includes>
+                        </artifactItem>
 					</artifactItems>
 				</configuration>
 				<executions>
@@ -124,7 +130,7 @@
 
 						</resource>
 						<resource>
-							<directory>${project.build.directory}/tmp</directory>
+							<directory>${project.build.directory}/tmp/media</directory>
 						</resource>
 					</webResources>
 				</configuration>
@@ -146,7 +152,7 @@
                 <!-- Add jersey rest interface -->
                 <dependency>
                     <groupId>net.anotheria</groupId>
-                    <artifactId>moskito-webui-jersey</artifactId>
+                    <artifactId>moskito-inspect-jersey</artifactId>
                     <version>${moskito-version}</version>
                 </dependency>
 			</dependencies>

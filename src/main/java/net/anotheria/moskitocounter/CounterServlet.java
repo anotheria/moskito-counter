@@ -34,6 +34,8 @@ public class CounterServlet extends MoskitoHttpServlet{
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
 
+		System.out.println("COUNTER!!!!");
+
 		toolCounter = new ToolCounter();
 		webUIPageCounter = new WebUIPageCounter();
 		versionCounter = new VersionCounter();
@@ -60,6 +62,7 @@ public class CounterServlet extends MoskitoHttpServlet{
 
 	@Override
 	protected void moskitoDoGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		System.out.println("COUNTER ????");
 		String path = req.getPathInfo();
 		if (path==null || path.length()==0)
 			return;
