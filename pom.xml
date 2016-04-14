@@ -12,7 +12,7 @@
 	<name>moskito-counter</name>
 	<packaging>war</packaging>
 	<properties>
-		<moskito-version>2.3.3-SNAPSHOT</moskito-version>
+		<moskito-version>2.4.1-SNAPSHOT</moskito-version>
 	</properties>
 
 	<dependencies>
