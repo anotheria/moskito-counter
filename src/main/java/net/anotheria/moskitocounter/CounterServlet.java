@@ -24,7 +24,7 @@ import java.io.OutputStream;
 @WebServlet(urlPatterns = "/counter/*")
 public class CounterServlet extends MoskitoHttpServlet{
 
-	private WebUIPageCounter webUIPageCounter;
+	private InspectPageCounter inspectPageCounter;
 	private ToolCounter toolCounter;
 	private VersionCounter versionCounter;
 	private byte[] data;
@@ -34,10 +34,8 @@ public class CounterServlet extends MoskitoHttpServlet{
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
 
-		System.out.println("COUNTER!!!!");
-
 		toolCounter = new ToolCounter();
-		webUIPageCounter = new WebUIPageCounter();
+		inspectPageCounter = new InspectPageCounter();
 		versionCounter = new VersionCounter();
 
 		File f = new File(config.getServletContext().getRealPath("spacer.gif"));
@@ -62,7 +60,6 @@ public class CounterServlet extends MoskitoHttpServlet{
 
 	@Override
 	protected void moskitoDoGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("COUNTER ????");
 		String path = req.getPathInfo();
 		if (path==null || path.length()==0)
 			return;
@@ -72,18 +69,18 @@ public class CounterServlet extends MoskitoHttpServlet{
 
 		String t[] = StringUtils.tokenize(path, '/');
 		String application = t[0];
-		String version = t[1];
+		String version = t.length>1 ? t[1] : "unknown";
 		boolean appHandled = false;
 
-		if (!appHandled && application.equals("webui")){
+		if (!appHandled && (application.equals("webui") || application.equals("inspect"))){
 			appHandled = true;
-			toolCounter.webui();
-			versionCounter.webui(version);
+			toolCounter.inspect();
+			versionCounter.inspect(version);
 
 			String pageName = t.length==1 ? "Unknown" : t[2];
 			if (pageName==null || pageName.length()==0)
 				pageName = "Unknown";
-			webUIPageCounter.countPage(pageName);
+			inspectPageCounter.countPage(pageName);
 		}
 
 		if (!appHandled && application.equals("control")){

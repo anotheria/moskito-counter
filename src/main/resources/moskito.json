@@ -35,14 +35,14 @@
             {
                 "name": "WebUI Total 1h",
                 "producerName": "ToolCounter",
-                "statName": "webui",
+                "statName": "inspect",
                 "valueName": "Counter",
                 "intervalName": "1h"
             },
             {
                 "name": "WebUI Total 5m",
                 "producerName": "ToolCounter",
-                "statName": "webui",
+                "statName": "inspect",
                 "valueName": "Counter",
                 "intervalName": "5m"
             },

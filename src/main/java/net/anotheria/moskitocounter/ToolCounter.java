@@ -10,7 +10,7 @@ import net.anotheria.moskito.aop.annotation.Count;
  */
 @Count
 public class ToolCounter {
-	public void webui(){
+	public void inspect(){
 	}
 
 	public void control(){

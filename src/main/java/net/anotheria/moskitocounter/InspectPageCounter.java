@@ -8,7 +8,7 @@ import net.anotheria.moskito.aop.annotation.CountByParameter;
  * @author lrosenberg
  * @since 27.11.13 09:31
  */
-public class WebUIPageCounter {
+public class InspectPageCounter {
 	@CountByParameter
 	public void countPage(String pageName){
 

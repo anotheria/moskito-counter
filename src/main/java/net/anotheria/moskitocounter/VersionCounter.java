@@ -13,7 +13,7 @@ public class VersionCounter {
 
 	}
 
-	@CountByParameter public void webui(String version){
+	@CountByParameter public void inspect(String version){
 
 	}
 }
