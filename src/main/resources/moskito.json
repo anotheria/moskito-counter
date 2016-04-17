@@ -33,14 +33,14 @@
                 "intervalName": "5m"
             },
             {
-                "name": "WebUI Total 1h",
+                "name": "Inspect Total 1h",
                 "producerName": "ToolCounter",
                 "statName": "inspect",
                 "valueName": "Counter",
                 "intervalName": "1h"
             },
             {
-                "name": "WebUI Total 5m",
+                "name": "Inspect Total 5m",
                 "producerName": "ToolCounter",
                 "statName": "inspect",
                 "valueName": "Counter",
@@ -62,6 +62,186 @@
             }
 
         ]
-    }
+    },
+  "@gaugesConfig": {
+    "@gauges": [
+      {
+        "name": "Constant",
+        "@minValue": {
+          "constant": 0
+        },
+        "@currentValue": {
+          "constant": 70
+        },
+        "@maxValue": {
+          "constant":100
+        }
+      },
+      {
+        "name": "Sessions",
+        "@minValue": {
+          "constant": 0
+        },
+        "@currentValue": {
+          "producerName": "SessionCount",
+          "statName": "Sessions",
+          "valueName": "cur",
+          "intervalName": "default"
+        },
+        "@maxValue": {
+          "producerName": "SessionCount",
+          "statName": "Sessions",
+          "valueName": "max",
+          "intervalName": "default"
+        }
+      },
+      {
+        "name": "Memory",
+        "caption": "Used memory",
+        "@minValue": {
+          "constant": 0
+        },
+        "@currentValue": {
+          "producerName": "Heap memory",
+          "statName": "Heap memory",
+          "valueName": "Used Mb",
+          "intervalName": "default"
+        },
+        "@maxValue": {
+          "producerName": "JavaRuntimeMax",
+          "statName": "JavaRuntimeMax",
+          "valueName": "Current Mb",
+          "intervalName": "default"
+        }
+      },
+      {
+        "name": "Blocked",
+        "caption": "Blocked Threads",
+        "@minValue": {
+          "constant": 0
+        },
+        "@currentValue": {
+          "producerName": "ThreadStates",
+          "statName": "BLOCKED",
+          "valueName": "Current",
+          "intervalName": "1m"
+        },
+        "@maxValue": {
+          "producerName": "ThreadCount",
+          "statName": "ThreadCount",
+          "valueName": "current",
+          "intervalName": "default"
+        }
+      },
+      {
+        "name": "Running",
+        "caption": "Running Threads",
+        "@minValue": {
+          "constant": 0
+        },
+        "@currentValue": {
+          "producerName": "ThreadStates",
+          "statName": "RUNNABLE",
+          "valueName": "Current",
+          "intervalName": "1m"
+        },
+        "@maxValue": {
+          "producerName": "ThreadCount",
+          "statName": "ThreadCount",
+          "valueName": "current",
+          "intervalName": "default"
+        }
+      }
+    ]
+  },
+
+  "@dashboardsConfig": {
+    "@dashboards": [
+      {
+        "name": "Example Dashboard",
+        "@charts": [
+          {
+            "caption": "Memory",
+            "accumulators": ["OldGenFree MB 1m", "OldGenUsed MB 1m", "PermGenFree MB 1m"]
+          },
+          {
+            "caption": "Threads",
+            "accumulators": ["ThreadCount", "ThreadStateBlocked-1m", "ThreadStateRunnable-1m", "ThreadStateTimedWaiting-1m", "ThreadStateWaiting-1m"]
+          },
+          {
+            "accumulators": ["URL REQ 1m"]
+          },
+          {
+            "accumulators": ["URL Time 1m"]
+          },
+          {
+            "accumulators": ["URL AVG 1m"]
+          },
+          {
+            "accumulators": ["SessionCount Cur Absolute"]
+          },
+          {
+            "accumulators": ["CPU Time 1m"]
+          }
+
+        ],
+        "@thresholds": ["ThreadCount","OldGenFree", "PermGenFree"],
+        "@gauges": ["Blocked", "Memory", "Running", "Sessions"]
+
+      },
+      {
+        "name": "Counter Dashboard",
+        "@charts": [
+          {
+            "caption": "5m",
+            "accumulators": [
+              "ToolsOverall 5m",
+              "Inspect Total 5m",
+              "Control Total 5m"
+            ]
+          },
+          {
+            "caption": "1h",
+            "accumulators": [
+              "ToolsOverall 1h",
+              "Inspect Total 1h",
+              "Control Total 1h"
+            ]
+          },
+          {
+            "accumulators": [
+              "ToolsOverall 5m"
+            ]
+          },
+          {
+            "accumulators": [
+              "ToolsOverall 1h"
+            ]
+          },
+          {
+            "accumulators": [
+              "Inspect Total 5m"
+            ]
+          },
+          {
+            "accumulators": [
+              "Inspect Total 1h"
+            ]
+          },
+          {
+            "accumulators": [
+              "Control Total 5m"
+            ]
+          },
+          {
+            "accumulators": [
+              "Control Total 1h"
+            ]
+          }
+        ]
+      }
+      ]
+
+  }
 	
 }
