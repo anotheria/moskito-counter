@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -41,7 +42,7 @@ public class LogProcessor implements PackageWorker<LogEntry> {
 	/**
 	 * Date format.
 	 */
-	private static final String DATE_FORMAT = "yyyy-MM-dd" + CSV_LINE_SEPARATOR + "hh:mm" + CSV_LINE_SEPARATOR + "X" + CSV_LINE_SEPARATOR + "E";
+	private static final String DATE_FORMAT = "yyyy-MM-dd" + CSV_LINE_SEPARATOR + "HH:mm:ss" + CSV_LINE_SEPARATOR + "z" + CSV_LINE_SEPARATOR + "EEE";
 	/**
 	 * {@link SimpleDateFormat} instance.
 	 */
@@ -55,7 +56,7 @@ public class LogProcessor implements PackageWorker<LogEntry> {
 	 * Constructor.
 	 */
 	public LogProcessor() {
-		this.format = new SimpleDateFormat(DATE_FORMAT);
+		this.format = new SimpleDateFormat(DATE_FORMAT, Locale.ENGLISH);
 	}
 
 	@Override
@@ -336,13 +337,13 @@ public class LogProcessor implements PackageWorker<LogEntry> {
 			final LoggingConfig.LoggingAggregationStrategy strategy = config.getAggregationStrategy();
 			switch (strategy) {
 				case HOUR:
-					return calendar.get(Calendar.YEAR) + NAME_SEPARATOR + "w_" + calendar.get(Calendar.WEEK_OF_YEAR) + NAME_SEPARATOR +
-							"d_" + calendar.get(Calendar.DAY_OF_YEAR) + NAME_SEPARATOR + "h_" + calendar.get(Calendar.HOUR_OF_DAY);
+					return calendar.get(Calendar.YEAR) + NAME_SEPARATOR + "w" + calendar.get(Calendar.WEEK_OF_YEAR) + NAME_SEPARATOR +
+							"d" + calendar.get(Calendar.DAY_OF_YEAR) + NAME_SEPARATOR + "h" + calendar.get(Calendar.HOUR_OF_DAY);
 				case DAY:
-					return calendar.get(Calendar.YEAR) + NAME_SEPARATOR + "w_" + calendar.get(Calendar.WEEK_OF_YEAR) + NAME_SEPARATOR +
-							"d_" + calendar.get(Calendar.DAY_OF_YEAR);
+					return calendar.get(Calendar.YEAR) + NAME_SEPARATOR + "w" + calendar.get(Calendar.WEEK_OF_YEAR) + NAME_SEPARATOR +
+							"d" + calendar.get(Calendar.DAY_OF_YEAR);
 				case WEEK:
-					return calendar.get(Calendar.YEAR) + NAME_SEPARATOR + "w_" + calendar.get(Calendar.WEEK_OF_YEAR);
+					return calendar.get(Calendar.YEAR) + NAME_SEPARATOR + "w" + calendar.get(Calendar.WEEK_OF_YEAR);
 				case MONTH:
 					return calendar.get(Calendar.YEAR) + NAME_SEPARATOR + "m_" + calendar.get(Calendar.MONTH);
 				default:
