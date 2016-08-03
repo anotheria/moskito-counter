@@ -94,9 +94,9 @@ public class LogEntry implements Serializable {
 	 */
 	public static String toDumpHeader(final char lineSeparator) {
 		final StringBuilder bld = new StringBuilder();
-		bld.append("'dateTime'").append(lineSeparator).append("'ip-address'").append(lineSeparator).
-				append("'application name'").append(lineSeparator).append("'app version'").append(lineSeparator).append("'page'")
-				.append(lineSeparator).append("'request headers'").append(lineSeparator).append("'request parameters'");
+		bld.append("Date & Time").append(lineSeparator).append("IP").append(lineSeparator).
+				append("App Name").append(lineSeparator).append("App Version").append(lineSeparator).append("Page")
+				.append(lineSeparator).append("Request Headers").append(lineSeparator).append("Request Parameters");
 		return bld.toString();
 	}
 
@@ -117,10 +117,10 @@ public class LogEntry implements Serializable {
 		for (final Map.Entry<String, String[]> entry : map.entrySet()) {
 			if (entry.getValue() != null)
 				for (final String value : entry.getValue())
-					container.append("'").append(entry.getKey()).append(" : ").append(value).append("' ");
+					container.append(entry.getKey()).append(":").append(value).append(" ");
 			else
 				//no value case
-				container.append("'").append(entry.getKey()).append(" : ").append("' ");
+				container.append(entry.getKey()).append(":").append(" ");
 		}
 		container.append("\"");
 	}
