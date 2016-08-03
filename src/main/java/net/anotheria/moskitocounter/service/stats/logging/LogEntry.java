@@ -71,18 +71,34 @@ public class LogEntry implements Serializable {
 		bld.append(time).append(lineSeparator).append(ip).append(lineSeparator);
 		bld.append(application).append(lineSeparator).append(version).
 				append(lineSeparator).append("\"").append(page).append("\"");
-		if (!cnf.isDumpHeaders() && !cnf.isDumpParams())
-			return bld.toString();
-		// headers
-		if (cnf.isDumpHeaders())
+		if (!cnf.isDumpHeaders())
+			bld.append(lineSeparator).append("-");
+		else
 			addMapData(headers, bld, lineSeparator);
+
 		// params
-		if (cnf.isDumpParams())
+		if (!cnf.isDumpParams())
+			bld.append(lineSeparator).append("-");
+		else
 			addMapData(params, bld, lineSeparator);
 
 		return bld.toString();
 	}
 
+	/**
+	 * Create csv/tsv header.
+	 *
+	 * @param lineSeparator
+	 * 		separator char
+	 * @return header line
+	 */
+	public static String toDumpHeader(final char lineSeparator) {
+		final StringBuilder bld = new StringBuilder();
+		bld.append("'dateTime'").append(lineSeparator).append("'ip-address'").append(lineSeparator).
+				append("'application name'").append(lineSeparator).append("'app version'").append(lineSeparator).append("'page'")
+				.append(lineSeparator).append("'request headers'").append(lineSeparator).append("'request parameters'");
+		return bld.toString();
+	}
 
 	/**
 	 * Add key-value pairs to 'container'.
@@ -101,10 +117,10 @@ public class LogEntry implements Serializable {
 		for (final Map.Entry<String, String[]> entry : map.entrySet()) {
 			if (entry.getValue() != null)
 				for (final String value : entry.getValue())
-					container.append(entry.getKey()).append(":").append(value).append(";");
+					container.append("'").append(entry.getKey()).append(" : ").append(value).append("' ");
 			else
 				//no value case
-				container.append(entry.getKey()).append(":").append(";");
+				container.append("'").append(entry.getKey()).append(" : ").append("' ");
 		}
 		container.append("\"");
 	}

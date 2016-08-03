@@ -36,7 +36,7 @@ public class LogProcessor implements PackageWorker<LogEntry> {
 	/**
 	 * Line separator.
 	 */
-	private static final char CSV_LINE_SEPARATOR = ',';
+	static final char CSV_LINE_SEPARATOR = ',';
 	/**
 	 * Logger holder.
 	 */
@@ -148,8 +148,8 @@ public class LogProcessor implements PackageWorker<LogEntry> {
 				ple.setContext(lc);
 				ple.start();
 
-				// Appenders
-				final RollingFileAppender<ILoggingEvent> fileAppender = new RollingFileAppender<ILoggingEvent>();
+				// Appenders - custom appender
+				final RollingFileAppender<ILoggingEvent> fileAppender = new SeparatedValueFileAppender<ILoggingEvent>();
 				fileAppender.setName(loggerName);
 				// set file path
 				fileAppender.setFile(resolveFilePath(loggerName, FILE_EXTENSION));
@@ -257,6 +257,10 @@ public class LogProcessor implements PackageWorker<LogEntry> {
 			 * Actual only in scope of cleanning thread.
 			 */
 			private long lastAccessTs;
+			/**
+			 * Defines whether logger was present or newly created.
+			 */
+			private boolean isNew = false;
 
 			/**
 			 * Constructor.
@@ -267,6 +271,7 @@ public class LogProcessor implements PackageWorker<LogEntry> {
 			public LoggerWrapper(final Logger logger) {
 				this.logger = logger;
 				this.lastAccessTs = System.currentTimeMillis();
+				this.isNew = false;
 			}
 
 			/**
@@ -282,11 +287,16 @@ public class LogProcessor implements PackageWorker<LogEntry> {
 				}
 			}
 
+			public void setNew(boolean aNew) {
+				isNew = aNew;
+			}
+
 			@Override
 			public String toString() {
 				return "CachedLogger{" +
 						"logger_name=" + logger.getName() +
 						"lastAccessTs=" + lastAccessTs +
+						"isNew=" + isNew +
 						'}';
 			}
 
