@@ -76,6 +76,7 @@ public class CounterServlet extends MoskitoHttpServlet {
 		try {
 			fIn = new FileInputStream(f);
 			data = new byte[fIn.available()];
+			//noinspection ResultOfMethodCallIgnored
 			fIn.read(data);
 			LOGGER.info("read " + data.length + " bytes");
 		} catch (final IOException e) {
@@ -138,7 +139,7 @@ public class CounterServlet extends MoskitoHttpServlet {
 				values.add(val);
 			}
 			if (!values.isEmpty())
-				headers.put(name, values.toArray(new String[values.size()]));
+				headers.put(name.toUpperCase(), values.toArray(new String[values.size()]));
 		}
 		return headers;
 	}

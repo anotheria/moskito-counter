@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author sshscp
  */
-@ConfigureMe (name = "logging-config")
+@ConfigureMe (name = "counter-logging-config")
 public class LoggingConfig implements Serializable {
 	/**
 	 * Basic serial version UID.
@@ -42,7 +42,7 @@ public class LoggingConfig implements Serializable {
 	 * Logs root dir path.
 	 */
 	@Configure
-	private String logRootDirPath = "/work/data/counter_logging/";
+	private String logRootDirPath = "/work/data/m_counter_log/";
 	/**
 	 * Allow to provide log file size.
 	 * Note LogBack classic  supports next suffixes -'kb', 'mb', 'gb', this suffixes are actual for logback logger.
@@ -65,15 +65,15 @@ public class LoggingConfig implements Serializable {
 	@Configure
 	private String[] headersToDump = new String[0];
 	/**
-	 * Dump - all headers or just selected.
+	 * Dump - headers or not.
 	 */
 	@Configure
-	private boolean dumpAllParams = true;
+	private boolean dumpParams = false;
 	/**
-	 * Dump - all params or just selected.
+	 * Dump -  params or not.
 	 */
 	@Configure
-	private boolean dumpAllHeaders = true;
+	private boolean dumpHeaders = true;
 
 	/**
 	 * Constructor.
@@ -152,26 +152,26 @@ public class LoggingConfig implements Serializable {
 		this.headersToDump = headersToDump;
 	}
 
-	public boolean isDumpAllParams() {
-		return dumpAllParams;
+	public boolean isDumpParams() {
+		return dumpParams;
 	}
 
-	public void setDumpAllParams(boolean dumpAllParams) {
-		this.dumpAllParams = dumpAllParams;
+	public void setDumpParams(boolean dumpParams) {
+		this.dumpParams = dumpParams;
 	}
 
-	public boolean isDumpAllHeaders() {
-		return dumpAllHeaders;
+	public boolean isDumpHeaders() {
+		return dumpHeaders;
 	}
 
-	public void setDumpAllHeaders(boolean dumpAllHeaders) {
-		this.dumpAllHeaders = dumpAllHeaders;
+	public void setDumpHeaders(boolean dumpHeaders) {
+		this.dumpHeaders = dumpHeaders;
 	}
 
 	/**
 	 * Provides logging aggregation alg.
 	 */
-	protected enum LoggingAggregationStrategy {
+	public enum LoggingAggregationStrategy {
 		/**
 		 * To new log entry each hour.
 		 */
@@ -203,8 +203,8 @@ public class LoggingConfig implements Serializable {
 				", aggregationStrategy=" + aggregationStrategy +
 				", paramsToDump=" + Arrays.toString(paramsToDump) +
 				", headersToDump=" + Arrays.toString(headersToDump) +
-				", dumpAllParams=" + dumpAllParams +
-				", dumpAllHeaders=" + dumpAllHeaders +
+				", dumpParams=" + dumpParams +
+				", dumpHeaders=" + dumpHeaders +
 				'}';
 	}
 }

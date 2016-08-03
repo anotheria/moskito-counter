@@ -48,7 +48,7 @@ public class LogProcessor implements PackageWorker<LogEntry> {
 			return;
 		final Logger configuredLogger = loggerProvider.getConfiguredLogger();
 		for (final LogEntry entry : workingPackage) {
-			configuredLogger.info(entry.toDumpLine(CSV_LINE_SEPARATOR));
+			configuredLogger.info(entry.toDumpLine(CSV_LINE_SEPARATOR, LoggingConfig.getInstance()));
 		}
 	}
 
@@ -310,15 +310,15 @@ public class LogProcessor implements PackageWorker<LogEntry> {
 			final LoggingConfig.LoggingAggregationStrategy strategy = config.getAggregationStrategy();
 			switch (strategy) {
 				case HOUR:
-					return calendar.get(Calendar.YEAR) + NAME_SEPARATOR + calendar.get(Calendar.WEEK_OF_YEAR) + NAME_SEPARATOR +
-							calendar.get(Calendar.DAY_OF_YEAR) + NAME_SEPARATOR + calendar.get(Calendar.HOUR_OF_DAY);
+					return calendar.get(Calendar.YEAR) + NAME_SEPARATOR + "w_" + calendar.get(Calendar.WEEK_OF_YEAR) + NAME_SEPARATOR +
+							"d_" + calendar.get(Calendar.DAY_OF_YEAR) + NAME_SEPARATOR + "h_" + calendar.get(Calendar.HOUR_OF_DAY);
 				case DAY:
-					return calendar.get(Calendar.YEAR) + NAME_SEPARATOR + calendar.get(Calendar.WEEK_OF_YEAR) + NAME_SEPARATOR +
-							calendar.get(Calendar.DAY_OF_YEAR);
+					return calendar.get(Calendar.YEAR) + NAME_SEPARATOR + "w_" + calendar.get(Calendar.WEEK_OF_YEAR) + NAME_SEPARATOR +
+							"d_" + calendar.get(Calendar.DAY_OF_YEAR);
 				case WEEK:
-					return calendar.get(Calendar.YEAR) + NAME_SEPARATOR + calendar.get(Calendar.WEEK_OF_YEAR);
+					return calendar.get(Calendar.YEAR) + NAME_SEPARATOR + "w_" + calendar.get(Calendar.WEEK_OF_YEAR);
 				case MONTH:
-					return calendar.get(Calendar.YEAR) + NAME_SEPARATOR + calendar.get(Calendar.MONTH);
+					return calendar.get(Calendar.YEAR) + NAME_SEPARATOR + "m_" + calendar.get(Calendar.MONTH);
 				default:
 					throw new AssertionError(strategy + " not supported");
 			}
