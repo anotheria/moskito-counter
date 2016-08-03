@@ -1,6 +1,7 @@
 package net.anotheria.moskitocounter.service.stats.logging;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -38,9 +39,24 @@ public class LogProcessor implements PackageWorker<LogEntry> {
 	 */
 	static final char CSV_LINE_SEPARATOR = ',';
 	/**
+	 * Date format.
+	 */
+	private static final String DATE_FORMAT = "yyyy-MM-dd" + CSV_LINE_SEPARATOR + "hh:mm" + CSV_LINE_SEPARATOR + "X" + CSV_LINE_SEPARATOR + "E";
+	/**
+	 * {@link SimpleDateFormat} instance.
+	 */
+	private final SimpleDateFormat format;
+	/**
 	 * Logger holder.
 	 */
 	private final LoggerProvider loggerProvider = new LoggerProvider();
+
+	/**
+	 * Constructor.
+	 */
+	public LogProcessor() {
+		this.format = new SimpleDateFormat(DATE_FORMAT);
+	}
 
 	@Override
 	public void doWork(final List<LogEntry> workingPackage) throws Exception {
@@ -48,7 +64,7 @@ public class LogProcessor implements PackageWorker<LogEntry> {
 			return;
 		final Logger configuredLogger = loggerProvider.getConfiguredLogger();
 		for (final LogEntry entry : workingPackage) {
-			configuredLogger.info(entry.toDumpLine(CSV_LINE_SEPARATOR, LoggingConfig.getInstance()));
+			configuredLogger.info(entry.toDumpLine(format, CSV_LINE_SEPARATOR, LoggingConfig.getInstance()));
 		}
 	}
 

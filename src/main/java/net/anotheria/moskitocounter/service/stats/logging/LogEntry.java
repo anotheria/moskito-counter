@@ -1,6 +1,7 @@
 package net.anotheria.moskitocounter.service.stats.logging;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 
@@ -66,9 +67,10 @@ public class LogEntry implements Serializable {
 	 * 		data separator in line scope
 	 * @return line
 	 */
-	public String toDumpLine(final char lineSeparator, final LoggingConfig cnf) {
+	public String toDumpLine(final SimpleDateFormat dateFormat, final char lineSeparator, final LoggingConfig cnf) {
 		final StringBuilder bld = new StringBuilder();
-		bld.append(time).append(lineSeparator).append(ip).append(lineSeparator);
+
+		bld.append(dateFormat.format(time)).append(lineSeparator).append(ip).append(lineSeparator);
 		bld.append(application).append(lineSeparator).append(version).
 				append(lineSeparator).append("\"").append(page).append("\"");
 		if (!cnf.isDumpHeaders())
@@ -94,7 +96,7 @@ public class LogEntry implements Serializable {
 	 */
 	public static String toDumpHeader(final char lineSeparator) {
 		final StringBuilder bld = new StringBuilder();
-		bld.append("Date & Time").append(lineSeparator).append("IP").append(lineSeparator).
+		bld.append("Date").append(lineSeparator).append("Time").append(lineSeparator).append("Time Zone").append(lineSeparator).append("Week Day").append(lineSeparator).append("IP").append(lineSeparator).
 				append("App Name").append(lineSeparator).append("App Version").append(lineSeparator).append("Page")
 				.append(lineSeparator).append("Request Headers").append(lineSeparator).append("Request Parameters");
 		return bld.toString();
