@@ -17,7 +17,6 @@ import java.util.TimeZone;
 
 import net.anotheria.moskito.web.MoskitoHttpServlet;
 import net.anotheria.moskitocounter.service.stats.logging.LoggingConfig;
-import net.anotheria.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
