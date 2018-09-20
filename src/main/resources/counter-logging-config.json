@@ -1,0 +1,8 @@
+{
+  "loggingEnabled": true,
+  "logRootDirPath": "/work/data/m_counter_log/",
+  "logFileMaxSize": "500MB",
+  "aggregationStrategy": "WEEK",
+  "dumpParams": false,
+  "dumpHeaders": true
+}
